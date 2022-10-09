@@ -9,7 +9,7 @@ form.addEventListener("submit", function (e) {
     // is empty checked by function
     checkRequired([username, email, password, password2]);
 
-    // is empty
+    // length check
 
     if (!ValidateEmail(email.value)) showError(email, "Email is not valid");
     else showSuccess(email);
@@ -52,7 +52,12 @@ function ValidateEmail(mail) {
 function checkRequired(inputsArr) {
     inputsArr.forEach(inputElement => {
         // trim korera por o jdi faka thake taile oi element er id dhore oi id dia show korsi cz id soba different
-        if (inputElement.value.trim("") === "") showError(inputElement, `${inputElement.id} is required!!`)
+        if (inputElement.value.trim("") === "") showError(inputElement, `${makeUppercase(inputElement)} is required!!`)
         else showSuccess(inputElement)
     });
 }
+
+
+// function to make 1st  character uppercvase of error massage
+const makeUppercase = (input) => input.id.charAt(0).toUpperCase() + input.id.slice(1);
+
