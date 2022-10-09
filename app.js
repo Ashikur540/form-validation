@@ -6,19 +6,15 @@ const password2 = document.getElementById('password2');
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+    // is empty checked by function
+    checkRequired([username, email, password, password2]);
+
     // is empty
-    if (username.value === "") showError(username, "username is required!!")
-    else showSuccess(username)
 
-    if (email.value === "") showError(email, "email is required!!")
-    else if (!ValidateEmail(email.value)) showError(email, "Email is not valid")
-    else showSuccess(email)
-
-
-    if (password.value === "") showError(password, "password is required!!")
-    else showSuccess(password)
-    if (password2.value === "") showError(password2, "password is required!!")
-    else showSuccess(password2)
+    if (!ValidateEmail(email.value)) showError(email, "Email is not valid");
+    else showSuccess(email);
+    // if (password2.value === "") showError(password2, "password is required!!")
+    // else showSuccess(password2)
 
 })
 
@@ -50,4 +46,13 @@ function ValidateEmail(mail) {
     }
     alert("You have entered an invalid email address!")
     return (false)
+}
+
+
+function checkRequired(inputsArr) {
+    inputsArr.forEach(inputElement => {
+        // trim korera por o jdi faka thake taile oi element er id dhore oi id dia show korsi cz id soba different
+        if (inputElement.value.trim("") === "") showError(inputElement, `${inputElement.id} is required!!`)
+        else showSuccess(inputElement)
+    });
 }
